@@ -69,7 +69,7 @@ jobs:
 
     - name: Update Version in pom.xml
       run: |
-        mvn -B versions:set -DnewVersion=${INPUTS_NEW_VERSION} -DgenerateBackupPoms=false
+        mvn -B versions:set -DnewVersion="${INPUTS_NEW_VERSION}" -DgenerateBackupPoms=false
       env:
         INPUTS_NEW_VERSION: ${{ inputs.new_version }}
 
