@@ -1,4 +1,5 @@
 name: Validate GitHub Actions Workflows
+permissions: {}
 
 on:
   pull_request:
@@ -10,7 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
 
       - name: Validate GitHub Actions
-        uses: jazzsequence/github-action-validator@v1
+        uses: jazzsequence/github-action-validator@8dce06e551e2b2a09f6e8c72e76fa4b60da5c8f1 # v1.0.1
+
+      - name: Run actionlint # https://github.com/rhysd/actionlint/blob/main/docs/usage.md#use-actionlint-on-github-actions
+        run: |
+          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          ./actionlint
+
+      - name: Run zizmor 🌈
+        uses: zizmorcore/zizmor-action@71321a20a9ded102f6e9ce5718a2fcec2c4f70d8 # v0.5.2
