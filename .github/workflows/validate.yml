@@ -15,13 +15,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Validate GitHub Actions
-        uses: jazzsequence/github-action-validator@8dce06e551e2b2a09f6e8c72e76fa4b60da5c8f1 # v1.0.1
-
-      - name: Run actionlint # https://github.com/rhysd/actionlint/blob/main/docs/usage.md#use-actionlint-on-github-actions
-        run: |
-          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
-          ./actionlint
+      - name: Run actionlint to lint our github action
+        uses: raven-actions/actionlint@205b530c5d9fa8f44ae9ed59f341a0db994aa6f8 # v2.1.2
 
       - name: Run zizmor 🌈
         uses: zizmorcore/zizmor-action@71321a20a9ded102f6e9ce5718a2fcec2c4f70d8 # v0.5.2
