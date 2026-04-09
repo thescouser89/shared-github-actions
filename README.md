@@ -34,7 +34,27 @@ Workflow for deploying snapshot versions to Maven Central.
 
 ## Maven Set Version (`maven-set-version.yml`)
 Workflow to update the version in a Maven `pom.xml`.
+
 - **Tasks**: Updates the version using `versions:set` and commits/pushes the change.
+ 
+This workflow should be manually called and an example of that may be seen [here](https://github.com/project-ncl/environment-driver/blob/main/.github/workflows/maven-set-version.yml). Its recommended that `on.workflow_dispatch` is used so the user can enter the appropriate values e.g.
+```
+on:
+  workflow_dispatch: # Manual trigger
+    inputs:
+      new_version:
+        description: '[Required] Version to set'
+        required: true
+        type: string
+...
+jobs:
+    call-maven-set-version-job:
+      permissions:
+        contents: write # needed to push commit and tag back to the repository
+      uses: project-ncl/shared-github-actions/.github/workflows/maven-set-version.yml@504efc82df7d4f73e3bd2b67bec31bcd532ed9e4 # v0.0.14
+      with:
+        new_version: ${{ inputs.new_version }}
+```
 
 
 ## Maven Jib (`maven-jib.yml`)
